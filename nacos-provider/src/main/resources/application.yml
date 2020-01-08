@@ -11,5 +11,8 @@ spring:
         server-addr: 47.93.251.190:8848
       config:
         server-addr: 47.93.251.190:8848
-lizi:
-  providerValue: 1234
+management:
+  endpoint:
+    web:
+      exposure:
+        include: *
