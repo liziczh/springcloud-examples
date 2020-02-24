@@ -11,8 +11,11 @@ spring:
         server-addr: 47.93.251.190:8848
       config:
         server-addr: 47.93.251.190:8848
-management:
-  endpoint:
-    web:
-      exposure:
-        include: *
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: '*'
+#  endpoint:
+#    health:
+#      show-details: always
