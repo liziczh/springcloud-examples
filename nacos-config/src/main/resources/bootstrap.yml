@@ -9,11 +9,25 @@ spring:
     active: dev
   cloud:
     nacos:
+      # 注册中心
       discovery:
-        server-addr: 47.93.251.190:8848
+        server-addr: 47.93.251.190:8848 # nacos-server地址和端口
+      # 配置中心
       config:
-        server-addr: 47.93.251.190:8848
-        prefix: nacos-config
-        file-extension: yml
-        group: GROUP1
-        namespace: e5fc50b3-4af9-40f7-b49d-8428f2951b1f
+        server-addr: 47.93.251.190:8848 # nacos-server地址和端口
+        prefix: nacos-config # dataId prefix
+        file-extension: yml # 配置文件类型
+#        group: GROUP1 # 组
+#        namespace: e5fc50b3-4af9-40f7-b49d-8428f2951b1f # 组命名空间
+        #外部配置
+        ext-config[0]:
+          dataId: config.yml
+#          group: GROUP1 # 外部配置的所属组
+          refresh: true # 配置文件是否支持自动刷新，默认不支持
+        ext-config[1]:
+          dataId: log.yml # 外部配置的dataId
+#          group: GROUP1 # 外部配置的所属组
+          refresh: true # 配置文件是否支持自动刷新，默认不支持
+        # 共享配置
+        shared-dataids: global.yml,common.yml # 共享配置dataId，使用","分割，以先后顺序加载。
+        refreshable-dataids: global.yml,common.yml # 共享配置开启动态刷新，使用","分割。
