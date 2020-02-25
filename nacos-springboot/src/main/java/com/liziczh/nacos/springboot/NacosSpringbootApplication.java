@@ -9,10 +9,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.alibaba.nacos.api.annotation.NacosInjected;
 import com.alibaba.nacos.api.exception.NacosException;
 import com.alibaba.nacos.api.naming.NamingService;
-import com.alibaba.nacos.spring.context.annotation.discovery.EnableNacosDiscovery;
 
 @SpringBootApplication
-@EnableNacosDiscovery
 public class NacosSpringbootApplication {
 	@NacosInjected
 	private NamingService namingService;
@@ -25,7 +23,7 @@ public class NacosSpringbootApplication {
 
 	@PostConstruct
 	public void registerInstance() throws NacosException {
-		namingService.registerInstance(applicationName, "47.93.251.190", serverPort);
+		namingService.registerInstance(applicationName, "127.0.0.1", serverPort);
 	}
 	public static void main(String[] args) {
 		SpringApplication.run(NacosSpringbootApplication.class, args);

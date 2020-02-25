@@ -1,11 +1,13 @@
 package com.liziczh.nacos.consumer.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
+import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.alibaba.nacos.api.config.annotation.NacosValue;
+import org.springframework.web.client.RestTemplate;
 
 /**
  * @author zhehao.chen
@@ -13,12 +15,17 @@ import com.alibaba.nacos.api.config.annotation.NacosValue;
 @RestController
 @RequestMapping("/consumer/")
 public class NacosConsumerController {
-	@NacosValue(value = "${lizi.consumerValue}", autoRefreshed = true)
-	private String consumerValue;
+	@Autowired
+	private RestTemplate restTemplate;
+
+	@Bean
+	@LoadBalanced
+	public RestTemplate getRestTemplate(){
+		return new RestTemplate();
+	}
 
 	@GetMapping(value = "get")
-	@ResponseBody
 	public String consumer() {
-		return "Nacos Consumer Value:" + consumerValue;
+		return restTemplate.getForObject("http://nacos-provider/provider/out/123456", String.class);
 	}
 }

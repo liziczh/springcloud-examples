@@ -1,0 +1,19 @@
+server:
+  port: 8083
+  servlet:
+    context-path: /config
+spring:
+  application:
+    name: nacos-config
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 47.93.251.190:8848
+      config:
+        server-addr: 47.93.251.190:8848
+        prefix: nacos-config
+        file-extension: ym
+        group: GROUP1
+        namespace: e5fc50b3-4af9-40f7-b49d-8428f2951b1f
