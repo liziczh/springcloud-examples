@@ -4,13 +4,14 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.liziczh</groupId>
-        <artifactId>lizi-nacos</artifactId>
+        <artifactId>nacos-discovery</artifactId>
         <version>0.0.1-SNAPSHOT</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <artifactId>nacos-config</artifactId>
+    <groupId>com.liziczh</groupId>
+    <artifactId>nacos-discovery-consumer</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>nacos-config</name>
+    <name>nacos-discovery-consumer</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
@@ -49,12 +50,10 @@
     </dependencies>
 
     <build>
-        <finalName>${project.artifactId}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>${spring-boot.version}</version>
             </plugin>
         </plugins>
     </build>
