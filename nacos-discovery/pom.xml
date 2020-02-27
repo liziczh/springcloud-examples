@@ -11,6 +11,8 @@
     <groupId>com.liziczh</groupId>
     <artifactId>nacos-discovery</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
     <name>nacos-discovery</name>
     <description>Demo project for Spring Boot</description>
 

@@ -24,6 +24,7 @@
 	<modules>
 		<module>nacos-config</module>
 		<module>nacos-discovery</module>
+		<module>springcloud-eureka</module>
 	</modules>
 
 </project>
