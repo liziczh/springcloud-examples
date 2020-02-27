@@ -6,9 +6,9 @@ spring:
 eureka:
   instance:
     instance-id: ${spring.application.name}:${server.port}
-    prefer-ip-address: true # ÉèÖÃÎ¢·şÎñµ÷ÓÃµØÖ·ÎªIPÓÅÏÈ
-    lease-renewal-interval-in-seconds: 30 # ĞÄÌøÊ±¼ä£¬¼´·şÎñĞøÔ¼¼ä¸ôÊ±¼ä£¬È±Ê¡ÖµÎª30s
-    lease-expiration-duration-in-seconds: 90 # ·¢´ôÊ±¼ä£¬¼´·şÎñĞøÔ¼µ½ÆÚÊ±¼ä£¨È±Ê¡Îª90s£©
+    prefer-ip-address: true # è®¾ç½®å¾®æœåŠ¡è°ƒç”¨åœ°å€ä¸ºIPä¼˜å…ˆ
+    lease-renewal-interval-in-seconds: 30 # å¿ƒè·³æ—¶é—´ï¼Œå³æœåŠ¡ç»­çº¦é—´éš”æ—¶é—´ï¼Œç¼ºçœå€¼ä¸º30s
+    lease-expiration-duration-in-seconds: 90 # å‘å‘†æ—¶é—´ï¼Œå³æœåŠ¡ç»­çº¦åˆ°æœŸæ—¶é—´ï¼ˆç¼ºçœä¸º90sï¼‰
   client:
     service-url:
       default-zone: http://localhost:8761/eureka/

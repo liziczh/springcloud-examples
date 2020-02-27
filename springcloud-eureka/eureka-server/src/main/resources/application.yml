@@ -5,12 +5,51 @@ spring:
     name: eureka-server
 eureka:
   instance:
-    hostname: localhost
-  server:
-    enable-self-preservation: false # ÊÇ·ñ¿ªÆô×ÔÎÒ±£»¤Ä£Ê½£¬Ä¬ÈÏÎªtrue
-    eviction-interval-timer-in-ms: 10000 # ĞøÆÚÊ±¼ä£¬¼´É¨ÃèÊ§Ğ§·şÎñµÄ¼ä¸ôÊ±¼ä£¨È±Ê¡ÖµÎª60*1000ms£©
+    hostname: peer1
   client:
-    register-with-eureka: false # ÊÇ·ñ½«×Ô¼º×÷Îªclient×¢²áµ½eureka-server£¬Ä¬ÈÏÎªtrue
-    fetch-registry: false # ÊÇ·ñÀ­È¡eureka×¢²áĞÅÏ¢£¬Ä¬ÈÏÎªtrue
     service-url:
-      default-zone: http://${eureka.instance.hostname}:${server.port}/eureka/
+      default-zone: http://peer1:8761/eureka/
+    register-with-eureka: true # æ˜¯å¦å°†è‡ªå·±ä½œä¸ºclientæ³¨å†Œåˆ°eureka-serverï¼Œé»˜è®¤ä¸ºtrue
+    fetch-registry: false # æ˜¯å¦æ‹‰å–eurekaæ³¨å†Œä¿¡æ¯ï¼Œé»˜è®¤ä¸ºtrue
+  server:
+    enable-self-preservation: false # æ˜¯å¦å¼€å¯è‡ªæˆ‘ä¿æŠ¤æ¨¡å¼ï¼Œé»˜è®¤ä¸ºtrue
+    eviction-interval-timer-in-ms: 10000 # ç»­æœŸæ—¶é—´ï¼Œå³æ‰«æå¤±æ•ˆæœåŠ¡çš„é—´éš”æ—¶é—´ï¼ˆç¼ºçœå€¼ä¸º60*1000msï¼‰
+#é›†ç¾¤é…ç½®
+#server:
+#  port: 8001
+#spring:
+#  application:
+#    name: eureka-server
+#  profiles: peer1
+#eureka:
+#  instance:
+#    hostname: peer1
+#  client:
+#    service-url:
+#      default-zone: http://peer2:8002/eureka/,http://peer3:8003/eureka/
+#---
+#server:
+#  port: 8002
+#spring:
+#  application:
+#    name: eureka-server
+#  profiles: peer2
+#eureka:
+#  instance:
+#    hostname: peer2
+#  client:
+#    service-url:
+#      default-zone: http://peer1:8001/eureka/,http://peer3:8003/eureka/
+#---
+#server:
+#  port: 8003
+#spring:
+#  application:
+#    name: eureka-server
+#  profiles: peer3
+#eureka:
+#  instance:
+#    hostname: peer3
+#  client:
+#    service-url:
+#      default-zone: http://peer1:8001/eureka/,http://peer2:8002/eureka/
