@@ -22,6 +22,7 @@
 
 	<modules>
 		<module>eureka-server</module>
+        <module>eureka-service-provider</module>
 	</modules>
 
 </project>
