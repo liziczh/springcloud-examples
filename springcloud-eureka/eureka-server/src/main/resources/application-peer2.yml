@@ -3,10 +3,11 @@ server:
 spring:
   application:
     name: eureka-server
-  profiles: peer2
+  profiles:
+    active: peer2
 eureka:
   instance:
-    hostname: peer2
+    hostname: localhost
   client:
     service-url:
-      default-zone: http://peer1:8001/eureka/,http://peer3:8003/eureka/
+      defaultZone: http://localhost:8001/eureka/,http://localhost:8003/eureka/

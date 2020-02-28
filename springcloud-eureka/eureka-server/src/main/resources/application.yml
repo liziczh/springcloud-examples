@@ -5,51 +5,12 @@ spring:
     name: eureka-server
 eureka:
   instance:
-    hostname: peer1
+    hostname: localhost
   client:
     service-url:
-      default-zone: http://peer1:8761/eureka/
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
     register-with-eureka: true # 是否将自己作为client注册到eureka-server，默认为true
     fetch-registry: false # 是否拉取eureka注册信息，默认为true
   server:
     enable-self-preservation: false # 是否开启自我保护模式，默认为true
     eviction-interval-timer-in-ms: 10000 # 续期时间，即扫描失效服务的间隔时间（缺省值为60*1000ms）
-#集群配置
-#server:
-#  port: 8001
-#spring:
-#  application:
-#    name: eureka-server
-#  profiles: peer1
-#eureka:
-#  instance:
-#    hostname: peer1
-#  client:
-#    service-url:
-#      default-zone: http://peer2:8002/eureka/,http://peer3:8003/eureka/
-#---
-#server:
-#  port: 8002
-#spring:
-#  application:
-#    name: eureka-server
-#  profiles: peer2
-#eureka:
-#  instance:
-#    hostname: peer2
-#  client:
-#    service-url:
-#      default-zone: http://peer1:8001/eureka/,http://peer3:8003/eureka/
-#---
-#server:
-#  port: 8003
-#spring:
-#  application:
-#    name: eureka-server
-#  profiles: peer3
-#eureka:
-#  instance:
-#    hostname: peer3
-#  client:
-#    service-url:
-#      default-zone: http://peer1:8001/eureka/,http://peer2:8002/eureka/
