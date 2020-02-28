@@ -37,5 +37,4 @@ public class RibbonConfig {
 		ServerListSubsetFilter filter = new ServerListSubsetFilter();
 		return filter;
 	}
-
 }
