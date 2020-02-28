@@ -8,6 +8,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "/provide/")
 public class EurekaServiceProviderController {
+	/**
+	 * 远程服务调用接口
+	 * @param value
+	 * @return
+	 */
 	@GetMapping(value = "out/{value}")
 	public String provide(@PathVariable String value){
 		return "EurekaServiceProvider::" + value;

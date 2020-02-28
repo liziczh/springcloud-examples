@@ -1,8 +1,10 @@
 server:
-  port: 8083
+  port: 8082
 spring:
   application:
-    name: eureka-service-consumer
+    name: eureka-service-provider
+  profiles:
+    active: ribbon2
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
@@ -16,8 +18,3 @@ eureka:
     service-url:
 #      default-zone: http://localhost:8761/eureka/  # 单机
       defaultZone: http://localhost:8001/eureka/,http://localhost:8002/eureka/,http://localhost:8003/eureka/ # 集群
-feign:
-  client:
-    config:
-      default:
-        connect-timeout: 10000

@@ -12,7 +12,10 @@ public class RibbonController {
 	private String appName;
 	@Value("${server.port}")
 	private String port;
-
+	/**
+	 * Ribbon负载均衡测试接口
+	 * @return
+	 */
 	@GetMapping(value = "port")
 	public String ribbon(){
 		return appName + "::" + port;
