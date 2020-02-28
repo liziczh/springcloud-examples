@@ -6,16 +6,21 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.liziczh.eureka.service.consumer.remote.FeignService;
+import com.liziczh.eureka.service.consumer.remote.ProviderFeignService;
 
 @RestController
 @RequestMapping(value = "/feign/")
-public class FeignController {
+public class FeignTestController {
 	@Autowired
-	private FeignService feignService;
+	private ProviderFeignService providerFeignService;
 
 	@GetMapping(value = "get/{value}")
 	public String get(@PathVariable String value){
-		return feignService.provide(value);
+		return providerFeignService.provide(value);
+	}
+
+	@GetMapping(value = "port")
+	public String port(){
+		return providerFeignService.ribbon();
 	}
 }
