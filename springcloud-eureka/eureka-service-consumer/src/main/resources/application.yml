@@ -13,5 +13,7 @@ eureka:
     service-url:
       default-zone: http://localhost:8761/eureka/
 feign:
-  httpclient:
-    connection-timeout: 10000
+  client:
+    config:
+      default:
+        connect-timeout: 10000

@@ -5,10 +5,12 @@ import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 @RestController
+@RequestMapping(value = "/consume/")
 public class EurekaServiceConsumerController {
 	@Bean
 	@LoadBalanced
@@ -19,9 +21,9 @@ public class EurekaServiceConsumerController {
 	@Autowired
 	private RestTemplate restTemplate;
 
-	@GetMapping(value = "/get/{value}")
+	@GetMapping(value = "get/{value}")
 	public String get(@PathVariable String value){
-		String url = "http://eureka-service-provider:8001/out/"+value;
+		String url = "http://eureka-service-provider:8001/provide/out/"+value;
 		return restTemplate.getForObject(url, String.class);
 	}
 }
