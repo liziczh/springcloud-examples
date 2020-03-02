@@ -9,11 +9,11 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.liziczh</groupId>
-	<artifactId>springcloud-eureka</artifactId>
+	<artifactId>springcloud-config</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
-	<name>springcloud-eureka</name>
+	<name>springcloud-config</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
@@ -21,9 +21,8 @@
 	</properties>
 
 	<modules>
-		<module>eureka-server</module>
-        <module>eureka-service-provider</module>
-		<module>eureka-service-consumer</module>
+		<module>config-server</module>
+        <module>config-client</module>
 	</modules>
 
 </project>
