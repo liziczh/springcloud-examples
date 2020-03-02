@@ -5,7 +5,9 @@ spring:
     name: config-client
   cloud:
     config:
+      uri: http://localhost:9001/ # config-server
+      label: master # git分支
       name: config-client  # 配置文件的名称
-      label: master # 配置文件的分支
       profile: pro # 获取配置的策略
+
 
