@@ -7,7 +7,7 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/liziczh/lizi-nacos  # git仓库地址
+          uri: https://github.com/liziczh/lizi-springcloud  # git仓库地址
           default-label: master # git分支
           search-paths: springcloud-config/config # 配置文件根目录
 #          username: liziczh  # 公开项目，无需配置
