@@ -1,0 +1,11 @@
+server:
+  port: 9002
+spring:
+  application:
+    name: config-client
+  cloud:
+    config:
+      name: config-client  # 配置文件的名称
+      label: master # 配置文件的分支
+      profile: pro # 获取配置的策略
+
