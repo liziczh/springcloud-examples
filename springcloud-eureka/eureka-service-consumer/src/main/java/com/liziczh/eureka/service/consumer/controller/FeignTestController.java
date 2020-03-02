@@ -6,13 +6,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.liziczh.eureka.service.consumer.remote.ProviderFeignService;
+import com.liziczh.eureka.service.consumer.remote.ProviderFeignClient;
 
 @RestController
 @RequestMapping(value = "/feign/")
 public class FeignTestController {
 	@Autowired
-	private ProviderFeignService providerFeignService;
+	private ProviderFeignClient providerFeignClient;
 	/**
 	 * Feign服务调用测试
 	 * @param value
@@ -20,7 +20,7 @@ public class FeignTestController {
 	 */
 	@GetMapping(value = "get/{value}")
 	public String get(@PathVariable String value){
-		return providerFeignService.provide(value);
+		return providerFeignClient.provide(value);
 	}
 	/**
 	 * Ribbon负载均衡测试
@@ -28,6 +28,6 @@ public class FeignTestController {
 	 */
 	@GetMapping(value = "port")
 	public String port(){
-		return providerFeignService.ribbon();
+		return providerFeignClient.ribbon();
 	}
 }

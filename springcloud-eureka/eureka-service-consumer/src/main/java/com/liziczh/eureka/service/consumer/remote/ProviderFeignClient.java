@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @Component
-@FeignClient(name = "EUREKA-SERVICE-PROVIDER")
-public interface ProviderFeignService {
+@FeignClient(name = "EUREKA-SERVICE-PROVIDER", fallback = ProviderFeignClientFallback.class)
+public interface ProviderFeignClient {
 
 	@GetMapping(value = "/provide/out/{value}")
 	String provide(@PathVariable String value);

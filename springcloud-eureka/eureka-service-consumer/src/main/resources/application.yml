@@ -14,10 +14,12 @@ eureka:
     lease-expiration-duration-in-seconds: 90 # 发呆时间，即服务续约到期时间（缺省为90s）
   client:
     service-url:
-#      default-zone: http://localhost:8761/eureka/  # 单机
-      defaultZone: http://localhost:8001/eureka/,http://localhost:8002/eureka/,http://localhost:8003/eureka/ # 集群
+      default-zone: http://localhost:8761/eureka/  # 单机
+#      defaultZone: http://localhost:8001/eureka/,http://localhost:8002/eureka/,http://localhost:8003/eureka/ # 集群
 feign:
   client:
     config:
       default:
         connect-timeout: 10000
+  hystrix:
+    enabled: true
