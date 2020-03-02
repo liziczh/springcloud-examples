@@ -1,2 +1,10 @@
-# lizi-nacos
-nacos-demo
+# Lizi-SpringCloud
+
+springcloud-demo
+- Eureka
+- Feign
+- Ribbon
+- Hystrix
+- Config
+- Nacos-Discovery
+- Nacos-Config
