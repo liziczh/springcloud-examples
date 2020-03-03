@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class SpringCloudConfigController {
 	@Value(value = "${db.username:admin}")
 	private String username;
-	@GetMapping(value = "testConfig")
-	public String testConfig() {
+	@GetMapping(value = "test")
+	public String test() {
 		return "username:" + username;
 	}
 }

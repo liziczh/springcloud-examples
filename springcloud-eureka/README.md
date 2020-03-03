@@ -11,7 +11,7 @@ Eureka，服务中心 / 注册中心，管理各种服务功能包括服务的�
 	<dependency>
 		<groupId>org.springframework.cloud</groupId>
 		<artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
-		<version>2.2.1.RELEASE</version>
+        <version>2.2.1.RELEASE</version>
 	</dependency>
 	<dependency>
 		<groupId>org.springframework.boot</groupId>
@@ -40,7 +40,7 @@ Eureka，服务中心 / 注册中心，管理各种服务功能包括服务的�
 
 > 注意springboot和springcloud的版本对应关系，本处使用的是Springboot parent 2.2.4 和 SpringCloud Hoxton.SR1。
 
-Eureka Server 配置：
+EurekaServer 配置：`application.yml`  
 
 ```yaml
 server:
@@ -51,17 +51,21 @@ spring:
 eureka:
   instance:
     hostname: localhost
-  server:
-    enable-self-preservation: false # 是否开启自我保护模式，默认为true
-    eviction-interval-timer-in-ms: 10000 # 续期时间，即扫描失效服务的间隔时间（缺省值为60*1000ms）
   client:
-    register-with-eureka: false # 是否将自己作为client注册到eureka-server，默认为true
-    fetch-registry: false # 是否拉取eureka注册信息，默认为true
     service-url:
-      default-zone: http://${eureka.instance.hostname}:${server.port}/eureka/
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+    # 是否将自己作为client注册到eureka-server，默认为true
+    register-with-eureka: true
+    # 是否拉取eureka注册信息，默认为true
+    fetch-registry: false
+  server:
+    # 是否开启自我保护模式，默认为true
+    enable-self-preservation: false
+    # 续期时间，即扫描失效服务的间隔时间（缺省值为60*1000ms）
+    eviction-interval-timer-in-ms: 10000
 ```
 
-启用EurekaServer
+SpringBootApplication：启用EurekaServer
 
 ```java
 @SpringBootApplication
@@ -72,6 +76,8 @@ public class EurekaServerApplication {
 	}
 }
 ```
+
+启动EurekaServer服务，访问 http://localhost:8761/。
 
 ### Service
 
@@ -124,15 +130,19 @@ spring:
 eureka:
   instance:
     instance-id: ${spring.application.name}:${server.port}
-    prefer-ip-address: true # 设置微服务调用地址为IP优先
-    lease-renewal-interval-in-seconds: 30 # 心跳时间，即服务续约间隔时间，缺省值为30s
-    lease-expiration-duration-in-seconds: 90 # 发呆时间，即服务续约到期时间（缺省为90s）
+    # 设置微服务调用地址为IP优先
+    prefer-ip-address: true
+    # 心跳时间，即服务续约间隔时间，缺省值为30s
+    lease-renewal-interval-in-seconds: 30
+    # 发呆时间，即服务续约到期时间（缺省为90s）
+    lease-expiration-duration-in-seconds: 90
   client:
     service-url:
+      # 单机
       defaultZone: http://localhost:8761/eureka/
 ```
 
-启用EurekaClient
+SpringBootApplication：启用EurekaClient
 
 ```java
 @SpringBootApplication
@@ -144,20 +154,24 @@ public class EurekaServiceProviderApplication {
 }
 ```
 
-Service Provider：
+Service Provider Controller 提供服务：
 
 ```java
 @RestController
 @RequestMapping(value = "/provide/")
 public class EurekaServiceProviderController {
-	@GetMapping(value = "out/{value}")
-	public String provide(@PathVariable String value){
-		return "EurekaServiceProvider::" + value;
+    @GetMapping(value = "hello")
+	public String hello(){
+		return "Hello! I'm " + appName + ", My port is " + port;
+	}
+	@GetMapping(value = "name/{name}")
+	public String name(@PathVariable String name){
+		return "Hello! My name is " + name;
 	}
 }
 ```
 
-Service Consumer：
+Service Consumer Controller 消费服务：
 
 ```java
 @RestController
@@ -171,10 +185,16 @@ public class EurekaServiceConsumerController {
 
 	@Autowired
 	private RestTemplate restTemplate;
-
-	@GetMapping(value = "get/{value}")
-	public String get(@PathVariable String value){
-		String url = "http://eureka-service-provider:8081/provide/out/"+value;
+    
+    @GetMapping(value = "hello")
+	public String hello(){
+		String url = "http://eureka-service-provider:8081/provide/hello";
+		return restTemplate.getForObject(url, String.class);
+	}
+	
+	@GetMapping(value = "name/{name}")
+	public String get(@PathVariable String name){
+		String url = "http://eureka-service-provider:8081/provide/name/"+name;
 		return restTemplate.getForObject(url, String.class);
 	}
 }
@@ -253,6 +273,7 @@ ServiceConsumer引入maven依赖：
 <dependency>
 	<groupId>org.springframework.cloud</groupId>
 	<artifactId>spring-cloud-starter-openfeign</artifactId>
+    <version>2.2.1.RELEASE</version>
 </dependency>
 ```
 
@@ -266,14 +287,29 @@ feign:
         connect-timeout: 10000
 ```
 
+SpringBootApplication：ServiceConsumer启用FeignClients
+
+```java
+@EnableEurekaClient
+@EnableFeignClients
+@SpringBootApplication
+public class EurekaServiceConsumerApplication {
+	public static void main(String[] args) {
+		SpringApplication.run(EurekaServiceConsumerApplication.class, args);
+	}
+}
+```
+
 **FeginClient**：
 
 ```java
 @Component
 @FeignClient(name = "EUREKA-SERVICE-PROVIDER")
 public interface FeignService {
-	@GetMapping(value = "/out/{value}")
-	String provide(@PathVariable String value);
+	@GetMapping(value = "/provide/hello")
+	String hello();
+	@GetMapping(value = "/provide/name/{name}")
+	String name(@PathVariable String name);
 }
 ```
 
@@ -338,7 +374,7 @@ public class RibbonConfig {
 }
 ```
 
-ServiceProvider添加注解@RibbonClient：
+SpringBootApplication：ServiceProvider添加注解@RibbonClient
 
 ```java
 @EnableEurekaClient
@@ -355,16 +391,16 @@ ServiceProvider测试：
 
 ```java
 @RestController
-@RequestMapping(value = "/ribbon/")
-public class RibbonController {
+@RequestMapping(value = "/provide/")
+public class EurekaServiceProviderController {
 	@Value("${spring.application.name}")
 	private String appName;
 	@Value("${server.port}")
 	private String port;
-	
-	@GetMapping(value = "port")
-	public String ribbon(){
-		return appName + "::" + port;
+
+	@GetMapping(value = "hello")
+	public String hello(){
+		return "Hello! I'm " + appName + ", My port is " + port;
 	}
 }
 ```
@@ -373,10 +409,10 @@ ServiceConsumer测试：
 
 ```java
 @Component
-@FeignClient(name = "EUREKA-SERVICE-PROVIDER")
-public interface ProviderFeignClient {
-	@GetMapping(value = "/ribbon/port")
-	String ribbon();
+@FeignClient(name = "EUREKA-SERVICE-PROVIDER", fallback = FeignServiceFallback.class)
+public interface FeignService {
+	@GetMapping(value = "/provide/hello")
+	String hello();
 }
 ```
 
@@ -408,13 +444,12 @@ FeignClient：
 
 ```java
 @Component
-@FeignClient(name = "EUREKA-SERVICE-PROVIDER", fallback = ProviderFeignClientFallback.class)
-public interface ProviderFeignClient {
-	@GetMapping(value = "/provide/out/{value}")
-	String provide(@PathVariable String value);
-
-	@GetMapping(value = "/ribbon/port")
-	String ribbon();
+@FeignClient(name = "EUREKA-SERVICE-PROVIDER", fallback = FeignServiceFallback.class)
+public interface FeignService {
+	@GetMapping(value = "/provide/hello")
+	String hello();
+	@GetMapping(value = "/provide/name/{name}")
+	String name(@PathVariable String name);
 }
 ```
 
@@ -422,14 +457,14 @@ FeignClienFallback：
 
 ```java
 @Component
-public class ProviderFeignClientFallback implements ProviderFeignClient {
+public class FeignServiceFallback implements FeignService {
 	@Override
-	public String provide(String value) {
-		return "Out Error";
+	public String name(String name) {
+		return "Name Error";
 	}
 	@Override
-	public String ribbon() {
-		return "Port Error";
+	public String hello() {
+		return "Hello Error";
 	}
 }
 ```

@@ -11,7 +11,7 @@ public class ServiceAController {
 	@Value("${server.port}")
 	private String port;
 
-	@GetMapping(value = "hello")
+	@GetMapping(value = "/hello")
 	public String hello() {
 		return "Hello! My Application Name is " + appName + ", My Port is " + port;
 	}

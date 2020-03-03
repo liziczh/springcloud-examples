@@ -16,16 +16,23 @@ spring:
           # ¶ÏÑÔ
           predicates:
             - After=2019-01-01T00:00:00+08:00[Asia/Shanghai]
-#            - Path=/hello
+#            - Before=2049-01-01T00:00:00+08:00[Asia/Shanghai]
+#            - Between=2019-01-01T00:00:00+08:00[Asia/Shanghai], 2049-01-01T00:00:00+08:00[Asia/Shanghai]
+#            - Cookie=sessionId, test
+#            - Header=X-Request-Id, \d+
+#            - Host=**.baidu.com
 #            - Method=GET
+#            - Path=/a
+#            - Query=name
+#            - RemoteAddr=192.168.1.1/24
 #          filter:
 #            # ½ØÈ¡PathÎ»Êý
 #            - StripPrefix=1
-#eureka:
-#  instance:
-#    hostname: localhost
-#    instance-id: ${spring.application.name}:${server.port}
-#    prefer-ip-address: true
-#  client:
-#    service-url:
-#      defaultZone: http://localhost:8761/eureka/
+eureka:
+  instance:
+    hostname: localhost
+    instance-id: ${spring.application.name}:${server.port}
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/

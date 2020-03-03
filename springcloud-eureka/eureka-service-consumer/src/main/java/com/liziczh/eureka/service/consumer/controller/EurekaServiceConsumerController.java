@@ -22,6 +22,15 @@ public class EurekaServiceConsumerController {
 	private RestTemplate restTemplate;
 	/**
 	 * 服务远程调用测试
+	 * @return
+	 */
+	@GetMapping(value = "hello")
+	public String hello(){
+		String url = "http://eureka-service-provider:8081/provide/hello";
+		return restTemplate.getForObject(url, String.class);
+	}
+	/**
+	 * 服务远程调用测试
 	 * @param name
 	 * @return
 	 */

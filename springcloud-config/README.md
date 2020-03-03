@@ -8,11 +8,11 @@
 <dependency>
 	<groupId>org.springframework.cloud</groupId>
 	<artifactId>spring-cloud-config-server</artifactId>
-	<version>2.2.1.RELEASE</version>
+    <version>2.2.1.RELEASE</version>
 </dependency>
 ```
 
-ConfigServer配置文件：application.yml
+ConfigServer配置文件：`application.yml`  
 
 ```yaml
 spring:
@@ -22,9 +22,12 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/liziczh/lizi-nacos  # git仓库地址
-          default-label: master # git分支
-          search-paths: springcloud-config/config # 配置文件根目录
+          # git仓库地址
+          uri: https://github.com/liziczh/lizi-springcloud
+          # git分支
+          default-label: master
+          # 配置文件根目录
+          search-paths: springcloud-config/config
           username: liziczh  # 公开项目，无需配置
           password: xxxxxx   # 公开项目，无需配置
 ```
@@ -43,7 +46,7 @@ public class ConfigServerApplication {
 
 **SpringCloud Config的URL与配置文件的映射关系**：
 
-```
+```yaml
 /{application}/{profile}[/{label}]
 /{application}-{profile}.yml
 /{label}/{application}-{profile}.yml
@@ -61,7 +64,7 @@ public class ConfigServerApplication {
 <dependency>
 	<groupId>org.springframework.cloud</groupId>
 	<artifactId>spring-cloud-starter-config</artifactId>
-	<version>2.2.1.RELEASE</version>
+    <version>2.2.1.RELEASE</version>
 </dependency>
 <dependency>
 	<groupId>org.springframework.boot</groupId>
@@ -74,17 +77,24 @@ ConfigClient配置文件：`bootstrap.yml`
 > 注意配置文件的名称为bootstrap.yml，bootstrap比application加载早。
 
 ```yaml
-server:
-  port: 9002
 spring:
   application:
     name: config-client
   cloud:
     config:
-      uri: http://localhost:9001/ # config-server
-      label: master # git分支
-      name: config-client  # 配置文件的名称
-      profile: pro # 获取配置的策略
+      # 配置中心地址
+      uri: http://localhost:9001/
+      # git分支
+      label: master
+      # 配置文件的名称
+      name: config-client
+      # 获取配置的策略
+      profile: pro
+      # 配置发现
+      discovery:
+        enabled: true
+        # 指定配置中心的service-id
+        service-id: config-server
 ```
 
 ConfigController：
@@ -96,12 +106,10 @@ ConfigController：
 public class SpringCloudConfigController {
 	@Value(value = "${db.username:admin}")
 	private String username;
-	@GetMapping(value = "testConfig")
-	public String testConfig() {
+	@GetMapping(value = "test")
+	public String test() {
 		return "username:" + username;
 	}
 }
 ```
-
-
 
