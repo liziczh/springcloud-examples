@@ -9,10 +9,23 @@ spring:
         locator:
           enabled: true  # 启用注册中心定位网关服务，启用后可直接使用应用名程调用服务
       routes:
-        # 路由标识
-        id: eureka-service-provider
-        # 目标服务URL
-        uri: http://localhost:8072/
-        # 断言
-        predicates:
-          Path= /hello
+          # 路由标识
+        - id: gateway-service-a
+          # 目标服务URL
+          uri: https://www.baidu.com
+          # 断言
+          predicates:
+            - After=2019-01-01T00:00:00+08:00[Asia/Shanghai]
+#            - Path=/hello
+#            - Method=GET
+#          filter:
+#            # 截取Path位数
+#            - StripPrefix=1
+#eureka:
+#  instance:
+#    hostname: localhost
+#    instance-id: ${spring.application.name}:${server.port}
+#    prefer-ip-address: true
+#  client:
+#    service-url:
+#      defaultZone: http://localhost:8761/eureka/

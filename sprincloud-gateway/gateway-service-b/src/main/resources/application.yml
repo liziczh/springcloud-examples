@@ -12,7 +12,15 @@ spring:
 #        # 路由标识
 #        id: gateway-service-b
 #        # 目标服务URL
-#        uri: http://localhost:8071/
+#        uri: http://localhost:8071
 #        # 断言
 #        predicates:
 #          Path= /hello
+eureka:
+  instance:
+    hostname: localhost
+    instance-id: ${spring.application.name}:${server.port}
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
