@@ -22,12 +22,12 @@ public class EurekaServiceConsumerController {
 	private RestTemplate restTemplate;
 	/**
 	 * 服务远程调用测试
-	 * @param value
+	 * @param name
 	 * @return
 	 */
-	@GetMapping(value = "get/{value}")
-	public String get(@PathVariable String value){
-		String url = "http://eureka-service-provider:8081/provide/out/"+value;
+	@GetMapping(value = "name/{name}")
+	public String get(@PathVariable String name){
+		String url = "http://eureka-service-provider:8081/provide/name/"+name;
 		return restTemplate.getForObject(url, String.class);
 	}
 }

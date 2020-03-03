@@ -1,0 +1,18 @@
+server:
+  port: 8072
+spring:
+  application:
+    name: gateway-service-b
+#  cloud:
+#    gateway:
+#      discovery:
+#        locator:
+#          enabled: true  # 启用注册中心定位网关服务，启用后可直接使用应用名程调用服务
+#      routes:
+#        # 路由标识
+#        id: gateway-service-b
+#        # 目标服务URL
+#        uri: http://localhost:8071/
+#        # 断言
+#        predicates:
+#          Path= /hello

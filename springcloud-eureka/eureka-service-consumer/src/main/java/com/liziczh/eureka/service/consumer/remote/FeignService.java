@@ -6,12 +6,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @Component
-@FeignClient(name = "EUREKA-SERVICE-PROVIDER", fallback = ProviderFeignClientFallback.class)
-public interface ProviderFeignClient {
-
-	@GetMapping(value = "/provide/out/{value}")
-	String provide(@PathVariable String value);
-
-	@GetMapping(value = "/ribbon/port")
-	String ribbon();
+@FeignClient(name = "EUREKA-SERVICE-PROVIDER", fallback = FeignServiceFallback.class)
+public interface FeignService {
+	@GetMapping(value = "/provide/hello")
+	String hello();
+	@GetMapping(value = "/provide/name/{name}")
+	String name(@PathVariable String name);
 }

@@ -9,8 +9,12 @@ eureka:
   client:
     service-url:
       defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
-    register-with-eureka: true # 是否将自己作为client注册到eureka-server，默认为true
-    fetch-registry: false # 是否拉取eureka注册信息，默认为true
+    # 是否将自己作为client注册到eureka-server，默认为true
+    register-with-eureka: true
+    # 是否拉取eureka注册信息，默认为true
+    fetch-registry: false
   server:
-    enable-self-preservation: false # 是否开启自我保护模式，默认为true
-    eviction-interval-timer-in-ms: 10000 # 续期时间，即扫描失效服务的间隔时间（缺省值为60*1000ms）
+    # 是否开启自我保护模式，默认为true
+    enable-self-preservation: false
+    # 续期时间，即扫描失效服务的间隔时间（缺省值为60*1000ms）
+    eviction-interval-timer-in-ms: 10000

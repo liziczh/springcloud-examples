@@ -4,34 +4,28 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>com.liziczh</groupId>
-		<artifactId>springcloud-eureka</artifactId>
+		<artifactId>sprincloud-gateway</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.liziczh</groupId>
-	<artifactId>eureka-service-provider</artifactId>
+	<artifactId>gateway-service-a</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>eureka-service-provider</name>
+	<packaging>jar</packaging>
+
+	<name>gateway-service-a</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
 		<java.version>1.8</java.version>
+		<spring-cloud.version>Hoxton.SR1</spring-cloud.version>
 	</properties>
 
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+			<artifactId>spring-cloud-starter-gateway</artifactId>
 			<version>2.2.1.RELEASE</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
-			<version>2.2.1.RELEASE</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -51,15 +45,14 @@
 			<dependency>
 				<groupId>org.springframework.cloud</groupId>
 				<artifactId>spring-cloud-dependencies</artifactId>
-				<version>Hoxton.SR1</version>
+				<version>${spring-cloud.version}</version>
 				<type>pom</type>
-				<scope>runtime</scope>
+				<scope>import</scope>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
 	<build>
-		<finalName>${project.artifactId}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
