@@ -8,4 +8,8 @@ spring:
       host: localhost
       port: 8500
       discovery:
+        register: true
+        hostname: localhost
         service-name: consul-producer
+        health-check-path: /actuator/health
+        health-check-interval: 15s
