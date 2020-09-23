@@ -6,15 +6,11 @@
 		<groupId>com.liziczh</groupId>
 		<artifactId>springcloud-eureka</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
-		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.liziczh</groupId>
 	<artifactId>eureka-server</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
-
-	<name>eureka-server</name>
-	<description>Demo project for Spring Boot</description>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

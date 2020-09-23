@@ -6,13 +6,10 @@
 		<groupId>com.liziczh</groupId>
 		<artifactId>springcloud-eureka</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
-		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.liziczh</groupId>
 	<artifactId>eureka-service-consumer</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>eureka-service-consumer</name>
-	<description>Demo project for Spring Boot</description>
 
 	<properties>
 		<java.version>1.8</java.version>

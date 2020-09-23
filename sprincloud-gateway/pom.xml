@@ -4,9 +4,8 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>com.liziczh</groupId>
-		<artifactId>lizi-springcloud</artifactId>
+		<artifactId>springcloud-examples</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
-		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.liziczh</groupId>
 	<artifactId>sprincloud-gateway</artifactId>
