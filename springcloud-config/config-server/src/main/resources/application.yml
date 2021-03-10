@@ -8,7 +8,7 @@ spring:
       server:
         git:
           # git仓库地址
-          uri: https://github.com/liziczh/lizi-springcloud
+          uri: https://github.com/liziczh/springcloud-examples
           # git分支
           default-label: master
           # 配置文件根目录
