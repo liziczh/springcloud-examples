@@ -7,13 +7,13 @@ spring:
 #    gateway:
 #      discovery:
 #        locator:
-#          enabled: true  # ÆôÓÃ×¢²áÖĞĞÄ¶¨Î»Íø¹Ø·şÎñ£¬ÆôÓÃºó¿ÉÖ±½ÓÊ¹ÓÃÓ¦ÓÃÃû³Ìµ÷ÓÃ·şÎñ
+#          enabled: true  # å¯ç”¨æ³¨å†Œä¸­å¿ƒå®šä½ç½‘å…³æœåŠ¡ï¼Œå¯ç”¨åå¯ç›´æ¥ä½¿ç”¨åº”ç”¨åç¨‹è°ƒç”¨æœåŠ¡
 #      routes:
-#        # Â·ÓÉ±êÊ¶
+#        # è·¯ç”±æ ‡è¯†
 #        id: gateway-service-b
-#        # Ä¿±ê·şÎñURL
+#        # ç›®æ ‡æœåŠ¡URL
 #        uri: http://localhost:8071
-#        # ¶ÏÑÔ
+#        # æ–­è¨€
 #        predicates:
 #          Path= /hello
 eureka:
